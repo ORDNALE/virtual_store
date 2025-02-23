@@ -8,7 +8,7 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>curso.projeto</groupId>
+	<groupId>virtualstore</groupId>
 	<artifactId>virtual-store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Virtual Store</name>
