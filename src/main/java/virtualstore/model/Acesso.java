@@ -1,6 +1,6 @@
 package virtualstore.model;
 
-import java.io.Serializable;
+import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,15 +11,23 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "categoria_produto")
-@SequenceGenerator(name = "seq_categoria_produto", sequenceName = "seq_categoria_produto", allocationSize = 1, initialValue = 1)
-public class CategoriaProduto implements Serializable  {
+@Table(name = "acesso")
+@SequenceGenerator(name = "acesso_seq", sequenceName = "acesso_seq", allocationSize = 1, initialValue = 1)
+public class Acesso implements GrantedAuthority {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria_produto")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acesso_seq")
     private long id;
-    @Column(name = "nome_desc", nullable = false)
-    private String nomeDesc;
+
+    @Column(nullable = false)
+    private String descricao; /*Acesso ex: ROLE_ADMIN ou ROLE_SECRETARIO  */
+
+    @Override
+    public String getAuthority() {
+        return this.descricao;
+    }
 
     public long getId() {
         return id;
@@ -29,12 +37,12 @@ public class CategoriaProduto implements Serializable  {
         this.id = id;
     }
 
-    public String getNomeDesc() {
-        return nomeDesc;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNomeDesc(String nomeDesc) {
-        this.nomeDesc = nomeDesc;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     @Override
@@ -53,12 +61,14 @@ public class CategoriaProduto implements Serializable  {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CategoriaProduto other = (CategoriaProduto) obj;
+        Acesso other = (Acesso) obj;
         if (id != other.id)
             return false;
         return true;
     }
 
-    
 
+
+
+    
 }
