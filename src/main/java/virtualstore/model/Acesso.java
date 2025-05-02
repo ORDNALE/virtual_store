@@ -12,13 +12,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "acesso")
-@SequenceGenerator(name = "acesso_seq", sequenceName = "acesso_seq", allocationSize = 1, initialValue = 1)
+@SequenceGenerator(name = "seq_acesso", sequenceName = "seq_acesso", allocationSize = 1, initialValue = 1)
 public class Acesso implements GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acesso_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_acesso")
     private long id;
 
     @Column(nullable = false)
@@ -66,9 +66,4 @@ public class Acesso implements GrantedAuthority {
             return false;
         return true;
     }
-
-
-
-
-    
 }
