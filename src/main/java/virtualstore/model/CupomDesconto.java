@@ -1,18 +1,23 @@
 
 package virtualstore.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "cupom_desc")
 @SequenceGenerator(name = "seq_cupom_desc", sequenceName = "seq_cupom_desc", allocationSize = 1, initialValue = 1)
-public class CupomDesconto implements serizalizable {
+public class CupomDesconto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,9 +30,9 @@ public class CupomDesconto implements serizalizable {
     @Temporal(TemporalType.DATE)
     private Date dataValidade;
 
-    private Bigdecimal valorRealDesconto;
+    private BigDecimal valorRealDesconto;
 
-    private Bigdecimal valorPorcentagemDesconto;
+    private BigDecimal valorPorcentagemDesconto;
 
 
     public long getId() {
@@ -86,9 +91,11 @@ public class CupomDesconto implements serizalizable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Acesso other = (Acesso) obj;
+        CupomDesconto other = (CupomDesconto) obj;
         if (id != other.id)
             return false;
         return true;
     }
+
+     
 }
