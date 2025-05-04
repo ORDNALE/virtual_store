@@ -30,7 +30,7 @@ public class Produto implements Serializable{
 
     private Boolean ativo = Boolean.TRUE;
 
-    //verificar associacao nota item produto
+    //verificar associacao ++nota item produto
 
     private Double pesoProd;
     private Double largura;
