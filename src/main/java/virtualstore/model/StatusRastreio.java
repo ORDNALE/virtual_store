@@ -62,7 +62,7 @@ public class StatusRastreio implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    
     public VendaCompraLojaVirtual getVendaCompraLojaVirtual() {
         return vendaCompraLojaVirtual;
     }

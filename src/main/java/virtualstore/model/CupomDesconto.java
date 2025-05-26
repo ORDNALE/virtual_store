@@ -1,6 +1,7 @@
 
 package virtualstore.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,8 +26,10 @@ public class CupomDesconto implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cupom_desc")
     private long id;
 
+    @Column(nullable = false)
     private String codDesconto;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataValidade;
 

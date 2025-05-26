@@ -18,6 +18,7 @@ public class CategoriaProduto implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria_produto")
     private long id;
+    
     @Column(name = "nome_desc", nullable = false)
     private String nomeDesc;
 

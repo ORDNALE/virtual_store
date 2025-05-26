@@ -3,8 +3,7 @@ package virtualstore.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.hibernate.annotations.ManyToAny;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -29,17 +28,25 @@ public class NotaFiscalCompra implements Serializable{
     @GeneratedValue(generator = "seq_nota_fiscal_compra", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(nullable = false)
     private String numeroNota;
+
+    @Column(nullable = false)
     private String serieNota;
+
     private String descricaoNota;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private String dataCompra;
 
+    @Column(nullable = false)
     private BigDecimal valorTotal;
+
+    @Column(nullable = false)
     private BigDecimal valorICMS;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Pessoa.class)
     @JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
     private Pessoa pessoa;
 

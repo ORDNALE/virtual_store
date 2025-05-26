@@ -2,6 +2,7 @@ package virtualstore.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -26,13 +27,14 @@ public class ItemVendaLoja implements Serializable {
     @GeneratedValue(generator = "seq_item_venda_loja", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(nullable = false)
     private Double quantidade;
 
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
     private Produto produto;
 
-    @ManyToOne(targetEntity = Pessoa.class)
+    @ManyToOne
     @JoinColumn(name = "vd_cp_lj_virtual_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "vd_cp_lj_virtual_fk"))
     private VendaCompraLojaVirtual vendaCompraLojaVirtual;
 

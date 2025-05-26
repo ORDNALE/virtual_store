@@ -2,6 +2,7 @@ package virtualstore.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -24,8 +25,10 @@ public class AvaliacaoProduto implements Serializable {
     @GeneratedValue(generator = "seq_avaliacao_produto", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(nullable = false)
     private Integer nota;
 
+    @Column(nullable = false)
     private String comentario;
 
     @ManyToOne
