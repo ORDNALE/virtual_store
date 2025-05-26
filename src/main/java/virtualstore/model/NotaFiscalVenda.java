@@ -25,18 +25,24 @@ public class NotaFiscalVenda implements Serializable{
     @GeneratedValue(generator = "seq_nota_fiscal_venda", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(nullable = false)
     private String numero;
+
+    @Column(nullable = false)
     private String serie;
+
+    @Column(nullable = false)
     private String tipo;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String xml;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String pdf;
 
     @OneToOne
-    @JoinColumn(name = "venda_compra_loja_virtual_id", nullable = false, unique = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_venda_compra_loja_virtual"))
+    @JoinColumn(name = "venda_compra_loja_virtual_id", nullable = false,
+     foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_venda_compra_loja_virtual"))
     private VendaCompraLojaVirtual vendaCompraLojaVirtual;  
     
     public Long getId() {

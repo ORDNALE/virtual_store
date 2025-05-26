@@ -22,26 +22,46 @@ public class Produto implements Serializable{
     @GeneratedValue(generator = "produto_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(nullable = false)
     private String tipoUnidade;
+
+    @Column(nullable = false)
     private String nomeProd;
 
-    @Column(columnDefinition = "TEXT", length = 2000)
+    @Column(columnDefinition = "TEXT", length = 2000, nullable = false)
     private String descricaoProd;
 
+    @Column(nullable = false)
     private Boolean ativo = Boolean.TRUE;
 
     //verificar associacao ++nota item produto
-
+    @Column(nullable = false)
     private Double pesoProd;
+
+    @Column(nullable = false)
     private Double largura;
+
+    @Column(nullable = false)
     private Double altura;
+
+    @Column(nullable = false)    
     private Double profundidade;
+
+    @Column(nullable = false)
     private BigDecimal valorVenda = BigDecimal.ZERO;
+
+    @Column(nullable = false)
     private Integer quantidadeEstoque = 0;
+
+
     private Integer alertaQtdEstoque = 0;
     private String linkProd;
+
+
     private Boolean alertaEstoque = Boolean.FALSE;
     private Integer qtdClique = 0;
+    
+    
     public Long getId() {
         return id;
     }
