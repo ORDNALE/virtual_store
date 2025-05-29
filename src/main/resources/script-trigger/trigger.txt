@@ -1,0 +1,146 @@
+--Script-banco-triggers
+--validações
+---------------------TB avaliacao_produto-----------------------------
+CREATE OR REPLACE FUNCTION validaChavePessoa()
+RETURNS TRIGGER LANGUAGE plpgsql AS $$
+DECLARE 
+    existe_pf INTEGER;
+    existe_pj INTEGER;
+BEGIN
+    existe_pf = (SELECT COUNT(1) FROM pessoa_fisica WHERE id = NEW.pessoa_id);
+    existe_pj = (SELECT COUNT(1) FROM pessoa_juridica WHERE id = NEW.pessoa_id);
+    
+    IF (existe_pf <= 0 AND existe_pj <= 0) THEN
+        RAISE EXCEPTION 'Não foi encontrado o ID ou PK da pessoa para realizar a associação';
+    END IF;
+    
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER validaChavePessoaInsert
+before update
+on avaliacao_produto
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChavePessoaUpdate
+before insert
+on avaliacao_produto
+for each row
+execute procedure validaChavePessoa();
+---------------------------------------------------------------------
+----------------------------TB Conta_Pagar---------------------------
+-- Usa a mesma function --
+
+CREATE TRIGGER validaChaveContaPagarInsert
+before update
+on conta_pagar
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChaveContaPagarUpdate
+before insert
+on conta_pagar
+for each row
+execute procedure validaChavePessoa();
+--
+CREATE OR REPLACE FUNCTION validaChavePessoaFornecedor()
+RETURNS TRIGGER LANGUAGE plpgsql AS $$
+DECLARE 
+    existe_pf INTEGER;
+    existe_pj INTEGER;
+BEGIN
+    existe_pf = (SELECT COUNT(1) FROM pessoa_fisica WHERE id = NEW.pes_fornecedor_id);
+    existe_pj = (SELECT COUNT(1) FROM pessoa_juridica WHERE id = NEW.pes_fornecedor_id);
+    
+    IF (existe_pf <= 0 AND existe_pj <= 0) THEN
+        RAISE EXCEPTION 'Não foi encontrado o ID ou PK da pessoa para realizar a associação';
+    END IF;
+    
+    RETURN NEW;
+END;
+$$;
+--
+CREATE TRIGGER validaIdContaPagarFornecedorInsert
+before update
+on conta_pagar
+for each row
+execute procedure validaChavePessoaFornecedor();
+
+CREATE TRIGGER validaIdContaPagarFornecedorUpdate
+before insert
+on conta_pagar
+for each row
+execute procedure validaChavePessoaFornecedor();
+----------------------------------------------------------------------------------
+-------------------------------TB Conta Receber---------------------------------------
+
+CREATE TRIGGER validaChavePessoaInsert
+before update
+on conta_receber
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChavePessoaUpdate
+before insert
+on conta_receber
+for each row
+execute procedure validaChavePessoa();
+----------------------------------------------------------------------------------
+--------------------------------TB Endereco -------------------------------------
+CREATE TRIGGER validaChavePessoaInsert
+before update
+on endereco
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChavePessoaUpdate
+before insert
+on endereco
+for each row
+execute procedure validaChavePessoa();
+---------------------------------------------------------------------------------
+---------------------------------TB nota_fiscal_compra---------------------------
+CREATE TRIGGER validaChavePessoaInsert
+before update
+on nota_fiscal_compra
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChavePessoaUpdate
+before insert
+on nota_fiscal_compra
+for each row
+execute procedure validaChavePessoa();
+---------------------------------------------------------------------------------
+---------------------------------TB Usuario--------------------------------------
+CREATE TRIGGER validaChavePessoaInsert
+before update
+on usuario
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChavePessoaUpdate
+before insert
+on usuario
+for each row
+execute procedure validaChavePessoa();
+---------------------------------------------------------------------------------
+---------------------------------TB vd_cp_loja_virt -----------------------------
+CREATE TRIGGER validaChavePessoaInsert
+before update
+on vd_cp_loja_virt
+for each row
+execute procedure validaChavePessoa();
+
+CREATE TRIGGER validaChavePessoaUpdate
+before insert
+on vd_cp_loja_virt
+for each row
+execute procedure validaChavePessoa();
+
+
+
+
+
